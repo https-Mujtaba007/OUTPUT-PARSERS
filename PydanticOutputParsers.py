@@ -27,5 +27,5 @@ template = PromptTemplate(
  )
 prompt = template.invoke({'place':'pakistani'})
 result = model.invoke(prompt)
-final_result= parser.parse(result.content)
+final_result= parser.parse(result)
 print(final_result)
