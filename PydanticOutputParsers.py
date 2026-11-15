@@ -26,10 +26,14 @@ template = PromptTemplate(
   input_variables=['place'],
   partial_variables={'format_instruction':parser.get_format_instructions()}
  )
-# prompt = template.invoke({'place':'pakistani'})
-# result = model.invoke(prompt)
+prompt = template.invoke({'place':'pakistani'})
 result = AIMessage(content='{"name": "Ali", "age": 25, "city": "Lahore"}')
 final_result = parser.parse(result)
 print(final_result)
-final_result= parser.parse(result)
-print(final_result)
+
+# result = model.invoke(prompt)
+# result = AIMessage(content='{"name": "Ali", "age": 25, "city": "Lahore"}')
+# final_result = parser.parse(result)
+# print(final_result)
+# final_result= parser.parse(result)
+# print(final_result)
