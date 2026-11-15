@@ -2,15 +2,16 @@ from langchain_huggingface import HuggingFaceEndpoint, ChatHuggingFace
 from dotenv import load_dotenv
 from langchain_classic.output_parsers import PydanticOutputParser
 from pydantic import BaseModel,Field
+from langchain_core.messages import AIMessage
 from langchain_core.prompts import PromptTemplate
 
 load_dotenv()
 
-llm = HuggingFaceEndpoint(
-    repo_id="Qwen/Qwen2.5-7B-Instruct",
-    task="text generation"
-)
-model= ChatHuggingFace(llm=llm)
+# llm = HuggingFaceEndpoint(
+#     repo_id="Qwen/Qwen2.5-7B-Instruct",
+#     task="text generation"
+# )
+# model= ChatHuggingFace(llm=llm)
 
 class Person(BaseModel):
   
@@ -25,7 +26,10 @@ template = PromptTemplate(
   input_variables=['place'],
   partial_variables={'format_instruction':parser.get_format_instructions()}
  )
-prompt = template.invoke({'place':'pakistani'})
-result = model.invoke(prompt)
+# prompt = template.invoke({'place':'pakistani'})
+# result = model.invoke(prompt)
+result = AIMessage(content='{"name": "Ali", "age": 25, "city": "Lahore"}')
+final_result = parser.parse(result)
+print(final_result)
 final_result= parser.parse(result)
 print(final_result)
